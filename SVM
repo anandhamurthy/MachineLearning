@@ -1,0 +1,51 @@
+from sklearn import svm
+#svm = support vector machine
+#svc = support vector classification
+x=[[0,0],[1,1],[2,2],[5,5]]
+#x=classes
+#y=features
+y=[1,2,3,3]
+clf=svm.SVC()
+clf.fit(x,y);
+print(clf.predict([[2,2],[0,0],[5,5]]))
+
+#subset of svm
+
+#gets support vector's indices
+print(clf.support_)
+#gets support vectors
+print(clf.support_vectors_)
+#gets no of support vectors for each class
+print(clf.n_support_)
+
+
+#Multi-class classification
+
+a = [[0], [1], [2], [3]]
+b = [0, 1, 2, 3]
+clf = svm.SVC(decision_function_shape='ovo')
+clf.fit(a,b)
+
+dec = clf.decision_function([[1]])
+dec.shape[1] # 4 classes: 4*3/2 = 6
+print(dec.shape[1])
+
+clf.decision_function_shape = "ovr"
+dec = clf.decision_function([[1]])
+dec.shape[1] # 4 classes
+print(dec.shape[1])
+
+lin_clf = svm.LinearSVC()
+lin_clf.fit(a,b)
+
+dec = lin_clf.decision_function([[1]])
+dec.shape[1]
+print(dec.shape[1])
+
+#Regression
+
+q=[[0,0],[2,2]]
+w=[0.5,2.5]
+rclf=svm.SVR()
+rclf.fit(q,w)
+print(rclf.predict([[1,1]]))
